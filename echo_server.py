@@ -67,7 +67,6 @@ def server(log_buffer=sys.stderr):
     except KeyboardInterrupt:
         # Use the python KeyboardInterrupt (Control + C) exception as a signal
         # to close the server socket and exit from the sever function
-        conn.close()
         sock.close()
 
         print('quitting echo server', file=log_buffer)
