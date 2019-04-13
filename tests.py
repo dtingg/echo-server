@@ -41,6 +41,17 @@ class EchoTestCase(unittest.TestCase):
             "expected {0}, got {1}".format(expected, actual)
         )
 
+    def test_exact_message_echo(self):
+        """test that a message exactly 16 bytes echoes cleanly"""
+        expected = "This is a test m"
+        actual = self.send_message(expected)
+
+        self.assertEqual(
+            expected,
+            actual,
+            "expected {0}, got {1}".format(expected, actual)
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

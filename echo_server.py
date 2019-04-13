@@ -34,7 +34,7 @@ def server(log_buffer=sys.stderr):
         # Outer loop controls the creation of new connection sockets.
         # Server will handle each incoming connection one at a time.
         while True:
-            print('waiting for a connection', file=log_buffer)
+            print('\nwaiting for a connection', file=log_buffer)
 
             # Make a new socket when a client connects
             conn, addr = sock.accept()
@@ -80,7 +80,7 @@ def server(log_buffer=sys.stderr):
                 # Close the socket you created when a client connected
                 conn.close()
 
-                print('echo complete, client connection closed\n', file=log_buffer)
+                print('echo complete, client connection closed', file=log_buffer)
 
     except KeyboardInterrupt:
         # Use the python KeyboardInterrupt (Control + C) exception as a signal
