@@ -13,6 +13,7 @@ def server(log_buffer=sys.stderr):
     :param log_buffer:
     :return:
     """
+
     # set an address for our server
     address = ('127.0.0.1', 10000)
 
@@ -47,8 +48,14 @@ def server(log_buffer=sys.stderr):
                     # Receive 16 bytes of data from the client.
                     buffer_size = 16
 
-                    # Store the data you receive as "data".  This is a bytes object.
+                    # Set timeout in case no data is received
+                    conn.settimeout(1)
+
+                    # Store the data you receive as "data"
                     data = conn.recv(buffer_size)
+
+                    if not data:
+                        break
 
                     print('received "{0}"'.format(data.decode('utf8')))
 
@@ -59,9 +66,11 @@ def server(log_buffer=sys.stderr):
                     print('sent "{0}"'.format(data.decode('utf8')))
 
                     # Check if you have received the end of the message
-                    # If so, break loop
                     if len(data) < 16:
                         break
+
+            except socket.timeout:
+                pass
 
             except Exception as e:
                 traceback.print_exc()
@@ -71,7 +80,7 @@ def server(log_buffer=sys.stderr):
                 # Close the socket you created when a client connected
                 conn.close()
 
-                print('echo complete, client connection closed', file=log_buffer)
+                print('echo complete, client connection closed\n', file=log_buffer)
 
     except KeyboardInterrupt:
         # Use the python KeyboardInterrupt (Control + C) exception as a signal

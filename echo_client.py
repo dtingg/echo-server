@@ -1,6 +1,7 @@
 """
 Echo client
 """
+
 import socket
 import sys
 import traceback
@@ -37,7 +38,13 @@ def client(msg, log_buffer=sys.stderr):
             # Get message in 16 byte chunks
             buffer_size = 16
 
+            # Set timeout for socket in case no data is received
+            sock.settimeout(1)
+
             chunk = sock.recv(buffer_size)
+
+            if not chunk:
+                break
 
             # Print each chunk received
             print('received "{0}"'.format(chunk.decode('utf8')), file=log_buffer)
@@ -48,6 +55,9 @@ def client(msg, log_buffer=sys.stderr):
             # Break loop if you have the end of the message
             if len(chunk) < buffer_size:
                 break
+
+    except socket.timeout:
+        pass
 
     except Exception as e:
         traceback.print_exc()
