@@ -1,9 +1,18 @@
+"""
+Echo server
+"""
+
 import socket
 import sys
 import traceback
 
 
 def server(log_buffer=sys.stderr):
+    """
+    Creates server socket.
+    :param log_buffer:
+    :return:
+    """
     # set an address for our server
     address = ('127.0.0.1', 10000)
 
