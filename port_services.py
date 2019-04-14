@@ -1,3 +1,8 @@
+"""
+Port Services
+Lookup services provided by a range of port numbers
+"""
+
 import sys
 import socket
 
@@ -13,10 +18,10 @@ def port_services(low_bound, high_bound):
     if low_bound > high_bound:
         print(f"Error: The lower bound port {low_bound} is higher than the higher bound port {high_bound}.")
         return
-    elif low_bound < 0:
+    if low_bound < 0:
         print(f"The lower bound port {low_bound} is out of range. Please choose ports from 0-65535.")
         return
-    elif high_bound > 65535:
+    if high_bound > 65535:
         print(f"The higher bound port {high_bound} is out of range. Please choose ports from 0-65535.")
         return
 

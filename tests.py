@@ -1,6 +1,10 @@
-from echo_client import client
+"""
+Tests for Echo server and client
+"""
+
 import socket
 import unittest
+from echo_client import client
 
 
 class EchoTestCase(unittest.TestCase):

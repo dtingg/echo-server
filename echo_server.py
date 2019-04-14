@@ -1,5 +1,5 @@
 """
-Echo server
+Echo Server
 """
 
 import socket
