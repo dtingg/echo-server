@@ -9,9 +9,7 @@ import traceback
 
 def server(log_buffer=sys.stderr):
     """
-    Creates server socket.
-    :param log_buffer:
-    :return:
+    Creates a server socket.
     """
 
     # set an address for our server
@@ -44,6 +42,7 @@ def server(log_buffer=sys.stderr):
 
                 # Inner loop will receive messages sent by client in buffers.
                 # When a complete message has been received, the loop will exit.
+
                 while True:
                     # Receive 16 bytes of data from the client.
                     buffer_size = 16
@@ -54,6 +53,7 @@ def server(log_buffer=sys.stderr):
                     # Store the data you receive as "data"
                     data = conn.recv(buffer_size)
 
+                    # Check if you have received the end of the message
                     if not data:
                         break
 
@@ -64,10 +64,6 @@ def server(log_buffer=sys.stderr):
 
                     # Log the data using a print statement
                     print('sent "{0}"'.format(data.decode('utf8')))
-
-                    # Check if you have received the end of the message
-                    if len(data) < 16:
-                        break
 
             except socket.timeout:
                 pass

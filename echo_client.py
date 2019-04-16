@@ -11,7 +11,6 @@ def client(msg, log_buffer=sys.stderr):
     """
     Creates client socket.
     :param msg: Message to be sent to server
-    :param log_buffer:
     :return: Message received from server
     """
 
@@ -43,6 +42,7 @@ def client(msg, log_buffer=sys.stderr):
 
             chunk = sock.recv(buffer_size)
 
+            # Check if you received the end of the message
             if not chunk:
                 break
 
@@ -51,10 +51,6 @@ def client(msg, log_buffer=sys.stderr):
 
             # Accumulate the chunks to build the entire reply from the server
             received_message += chunk.decode("utf8")
-
-            # Break loop if you have the end of the message
-            if len(chunk) < buffer_size:
-                break
 
     except socket.timeout:
         pass
